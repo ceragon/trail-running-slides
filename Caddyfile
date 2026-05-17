@@ -1,0 +1,19 @@
+:8008 {
+	root * dist
+
+	@assets path /assets/*
+	handle @assets {
+		file_server
+	}
+
+	@dotfile path /.folders.json
+	handle @dotfile {
+		rewrite * /folders.json
+		file_server
+	}
+
+	handle {
+		try_files {path} /index.html
+		file_server
+	}
+}

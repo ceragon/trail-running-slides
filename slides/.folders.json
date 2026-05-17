@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "id": "trail-running",
+      "name": "trail-running",
+      "icon": {
+        "type": "color",
+        "value": "#64748b"
+      }
+    }
+  ],
+  "assignments": {}
+}
