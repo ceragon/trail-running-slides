@@ -34,10 +34,10 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm build
-
-      - name: Fix asset paths for subpath hosting
-        run: sed -i 's|"/assets/|"./assets/|g' dist/index.html
+      - name: Build for GitHub Pages
+        run: node scripts/build-gh-pages.mjs
+        env:
+          PAGES_BASE: /trail-running-slides/
 
       - uses: actions/configure-pages@v5
 
