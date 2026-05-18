@@ -1,15 +1,17 @@
 import { useState, useEffect, type CSSProperties } from 'react';
 import type { DesignSystem, Page, SlideMeta } from '@open-slide/core';
 
-import coverMountain from './assets/cover-mountain.jpg';
+import coverTrail from './assets/cover-trail.png';
 import roadRunning from './assets/road-running.jpg';
 import mountainTrail from './assets/mountain-trail.jpg';
-import chongliRidge from './assets/chongli-ridge.jpg';
+import chongliRace from './assets/chongli-race.jpeg';
+import moganTrail from './assets/mogan-trail.avif';
 import ancientPath from './assets/ancient-stone-path.jpg';
 import trailRunner from './assets/trail-runner-silhouette.jpg';
 import dataCoros from './assets/data-coros.png';
 import coverMogan from './assets/cover-mogan.jpg';
-import natureZen from './assets/nature-zen.jpg';
+import xishanSteps from './assets/xishan-steps.jpg';
+import xishanSummit from './assets/xishan-summit-view.jpg';
 import wserStart from './assets/wser-start.jpg';
 import ws100Trail from './assets/ws100-trail.jpeg';
 import ws100River from './assets/ws100-river.jpeg';
@@ -62,10 +64,27 @@ const styles = `
     from { opacity: 0; }
     to { opacity: 1; }
   }
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes fadeRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
 `;
 
 const fadeUp = (delay = 0): CSSProperties => ({
   animation: `fadeUp 0.72s ease-out ${delay}s both`,
+});
+const fadeLeft = (delay = 0): CSSProperties => ({
+  animation: `fadeLeft 0.72s ease-out ${delay}s both`,
+});
+const fadeRight = (delay = 0): CSSProperties => ({
+  animation: `fadeRight 0.72s ease-out ${delay}s both`,
+});
+const fadeOnly = (delay = 0): CSSProperties => ({
+  animation: `fadeIn 0.72s ease-out ${delay}s both`,
 });
 
 const shell = (background = warmWhite, color = ink): CSSProperties => ({
@@ -175,13 +194,13 @@ const Cover: Page = () => (
   <div style={{ ...fill, background: darkGreen, color: '#fff' }}>
     <style>{styles}</style>
     <img
-      src={coverMountain}
+      src={coverTrail}
       alt=""
       style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 42%', filter: 'brightness(0.6)' }}
     />
     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(9,26,11,0.86), rgba(9,26,11,0.2) 66%)' }} />
     <div style={{ position: 'absolute', left: 132, right: 132, bottom: 126, boxSizing: 'border-box' }}>
-      <div style={{ ...fadeUp(0.1) }}>
+      <div style={{ ...fadeOnly(0.1) }}>
         <Eyebrow dark>Trail Running</Eyebrow>
       </div>
       <h1
@@ -192,14 +211,14 @@ const Cover: Page = () => (
           lineHeight: 1.04,
           margin: '18px 0 28px',
           maxWidth: 1120,
-          ...fadeUp(0.22),
+          ...fadeOnly(0.22),
         }}
       >
         越野跑
         <br />
         用脚步重新认识世界
       </h1>
-      <p style={{ fontSize: 40, color: 'rgba(255,255,255,0.78)', margin: 0, ...fadeUp(0.36) }}>
+      <p style={{ fontSize: 40, color: 'rgba(255,255,255,0.78)', margin: 0, ...fadeOnly(0.36) }}>
         不是比谁跑得快，是比谁看到的风景多
       </p>
     </div>
@@ -223,14 +242,14 @@ const PageRoadVsTrail: Page = () => (
 const PageOrigins: Page = () => (
   <div style={{ ...shell(darkGreen, '#fff'), display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 70, alignItems: 'center' }}>
     <style>{styles}</style>
-    <div style={fadeUp(0.1)}>
+    <div style={fadeLeft(0.1)}>
       <Eyebrow dark>Origin</Eyebrow>
       <Heading dark>越野跑是怎么来的？</Heading>
       <p style={{ fontSize: 36, lineHeight: 1.55, color: 'rgba(255,255,255,0.72)', margin: '30px 0 0' }}>
         公路跑是近代运动项目，越野跑更像人类早就会做的事：翻山、穿林、沿着古道抵达另一个地方。
       </p>
     </div>
-    <div style={{ display: 'grid', gap: 18, ...fadeUp(0.22) }}>
+    <div style={{ display: 'grid', gap: 18, ...fadeOnly(0.22) }}>
       {[
         ['远古时代', '奔跑是移动、生存和探索的能力。'],
         ['古道时代', '驿道、商道、朝圣路把山脉和村镇连起来。'],
@@ -257,17 +276,39 @@ const PageAncientPaths: Page = () => (
     <img src={ancientPath} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', filter: 'brightness(0.5)' }} />
     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,25,9,0.9), rgba(10,25,9,0.16))' }} />
     <div style={{ position: 'absolute', left: 132, top: 132, width: 1140 }}>
-      <div style={fadeUp(0.1)}>
+      <div style={fadeOnly(0.1)}>
         <Eyebrow dark>Ancient Trails</Eyebrow>
         <Heading dark size={82}>很多赛道，是古人走过的路</Heading>
       </div>
-      <p style={{ fontSize: 38, lineHeight: 1.58, color: 'rgba(255,255,255,0.82)', margin: '40px 0 42px', maxWidth: 1050, ...fadeUp(0.22) }}>
+      <p style={{ fontSize: 38, lineHeight: 1.58, color: 'rgba(255,255,255,0.82)', margin: '40px 0 42px', maxWidth: 1050, ...fadeOnly(0.22) }}>
         越野跑有意思的地方，不只是自然风景，而是你会用身体重新理解一条路为什么存在。
       </p>
-      <div style={{ display: 'flex', gap: 24, ...fadeUp(0.34) }}>
-        {['商道', '驿道', '朝圣路', '淘金路线'].map((item) => (
-          <div key={item} style={{ border: '1px solid rgba(255,255,255,0.28)', borderRadius: 999, padding: '16px 28px', fontSize: 28, color: '#fff' }}>
-            {item}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20, alignItems: 'start', ...fadeOnly(0.34) }}>
+        {([
+          ['商道', <svg key="s" width="100" height="70" viewBox="0 0 100 70" fill="none" stroke="rgba(255,255,255,0.85)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 58c4-18 12-30 22-30s10 8 14 8 6-8 16-8 12 12 16 30"/><ellipse cx="32" cy="28" rx="4" ry="6"/><path d="M28 22c2-6 4-10 4-14"/><ellipse cx="56" cy="20" rx="4" ry="6"/><path d="M52 14c2-6 4-10 4-14"/><path d="M5 60h90"/></svg>, '丝绸之路 · 八百流沙', '沿玄奘西行路线，穿越甘肃戈壁 400km，自导航荒漠赛'],
+          ['驿道', <svg key="y" width="100" height="70" viewBox="0 0 100 70" fill="none" stroke="rgba(255,255,255,0.85)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M35 18c6-10 14-14 18-10s-2 12-2 20 4 16 4 22"/><path d="M45 8c4-4 10-6 14-4"/><ellipse cx="50" cy="6" rx="4" ry="4"/><path d="M55 50l10 8M45 50l-8 10"/><path d="M20 30h-8v30h8v-30z"/><path d="M16 24l-4-10h12l-4 10"/><path d="M5 62h90"/></svg>, '徽杭古道', '明代徽商入浙的石板驿道，如今是华东经典越野徒步线路'],
+          ['朝圣路', <svg key="c" width="100" height="70" viewBox="0 0 100 70" fill="none" stroke="rgba(255,255,255,0.85)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="42" cy="10" r="5"/><path d="M42 15v24M36 22h12M38 39l-6 22M46 39l6 22"/><path d="M30 15v-4l-2 0v46"/><path d="M62 60L72 30l10 30"/><path d="M66 48h12"/><path d="M5 62h90"/></svg>, '圣地亚哥之路', 'Camino de Santiago，800km 横穿西班牙，千年朝圣古道'],
+          ['淘金路线', <svg key="t" width="100" height="70" viewBox="0 0 100 70" fill="none" stroke="rgba(255,255,255,0.85)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="36" cy="12" r="5"/><path d="M36 17v18M30 24h12M32 35l-6 18M40 35l6 18"/><path d="M54 38l14-20 6 4-14 20z"/><path d="M52 40l4 4"/><path d="M62 8c8 4 18 14 22 24"/><path d="M5 58h90"/></svg>, '西部100', '加州淘金时代马术路线，现为百英里越野跑的起源赛事'],
+        ] as [string, React.ReactElement, string, string][]).map(([label, icon, routeName, routeDesc]) => (
+          <div
+            key={label}
+            style={{
+              border: '1px solid rgba(255,255,255,0.18)',
+              borderRadius: 12,
+              padding: '24px 20px',
+              background: 'rgba(255,255,255,0.06)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 14,
+            }}
+          >
+            {icon}
+            <div style={{ fontSize: 26, color: '#fff', fontWeight: 800 }}>{label}</div>
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.18)', paddingTop: 14, width: '100%' }}>
+              <div style={{ fontSize: 22, fontWeight: 800, color: moss, marginBottom: 6, textAlign: 'center' }}>{routeName}</div>
+              <div style={{ fontSize: 19, color: 'rgba(255,255,255,0.7)', lineHeight: 1.4, textAlign: 'center' }}>{routeDesc}</div>
+            </div>
           </div>
         ))}
       </div>
@@ -278,7 +319,7 @@ const PageAncientPaths: Page = () => (
 const PagePersonalData: Page = () => (
   <div style={{ ...shell(), display: 'grid', gridTemplateColumns: '0.98fr 1.02fr', gap: 58, alignItems: 'center' }}>
     <style>{styles}</style>
-    <div style={fadeUp(0.1)}>
+    <div style={fadeLeft(0.1)}>
       <Eyebrow>Personal Experience</Eyebrow>
       <Heading>同样 25 公里，完全不同的世界</Heading>
       <p style={{ fontSize: 35, lineHeight: 1.55, color: muted, margin: '26px 0 48px' }}>
@@ -294,7 +335,7 @@ const PagePersonalData: Page = () => (
         2026 莫干山 EMG 20K：总排名 154 / 性别排名 136
       </div>
     </div>
-    <div style={{ position: 'relative', height: 760, ...fadeUp(0.22) }}>
+    <div style={{ position: 'relative', height: 760, ...fadeOnly(0.22) }}>
       <CaptionedImage image={coverMogan} title="莫干山" subtitle="竹海、古道、短坡和湿滑路面交替出现" height={760} objectPosition="center 45%" />
       <div style={{ position: 'absolute', right: 36, top: 36, width: 252, height: 456, borderRadius: 18, overflow: 'hidden', boxShadow: '0 22px 60px rgba(0,0,0,0.38)', background: '#fff' }}>
         <img src={dataCoros} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
@@ -311,8 +352,8 @@ const PageMountainMood: Page = () => (
       <p style={{ fontSize: 32, color: muted, margin: '12px 0 0' }}>同样是越野，不同地形会把比赛变成完全不同的体验。</p>
     </div>
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0, ...fadeUp(0.22) }}>
-      <CaptionedImage image={chongliRidge} title="崇礼" subtitle="开阔、硬朗、山脊线长，人在风里显得很小。" height="100%" objectPosition="center" dim={0.64} />
-      <CaptionedImage image={natureZen} title="莫干山" subtitle="湿润、起伏、绿意层叠，路面细碎多变。" height="100%" objectPosition="center" dim={0.64} />
+      <CaptionedImage image={chongliRace} title="崇礼" subtitle="开阔、硬朗、山脊线长，人在风里显得很小。" height="100%" objectPosition="center" dim={0.64} />
+      <CaptionedImage image={moganTrail} title="莫干山" subtitle="湿润、起伏、绿意层叠，路面细碎多变。" height="100%" objectPosition="center" dim={0.64} />
     </div>
   </div>
 );
@@ -320,14 +361,14 @@ const PageMountainMood: Page = () => (
 const PageWhy: Page = () => (
   <div style={{ ...shell(darkGreen, '#fff'), display: 'grid', gridTemplateColumns: '1fr 0.9fr', gap: 70, alignItems: 'center' }}>
     <style>{styles}</style>
-    <div style={fadeUp(0.1)}>
+    <div style={fadeLeft(0.1)}>
       <Eyebrow dark>Why I Run</Eyebrow>
       <Heading dark size={82}>为什么我喜欢越野跑？</Heading>
       <p style={{ fontSize: 40, lineHeight: 1.55, color: 'rgba(255,255,255,0.84)', margin: '38px 0 0' }}>
         城市生活太包裹了。越野让人重新感受到风、泥土、呼吸、疲劳，以及身体真的在场。
       </p>
     </div>
-    <div style={{ ...fadeUp(0.22) }}>
+    <div style={{ ...fadeOnly(0.22) }}>
       <CaptionedImage image={trailRunner} title="不是逃离城市" subtitle="是偶尔把注意力交还给身体和自然。" height={670} objectPosition="center" dim={0.55} />
     </div>
   </div>
@@ -352,9 +393,9 @@ const PageGlobalStyles: Page = () => (
 const PageWestern100: Page = () => (
   <div style={{ ...shell(), display: 'grid', gridTemplateColumns: '2fr 3fr', gap: 60, alignItems: 'center' }}>
     <style>{styles}</style>
-    <div style={fadeUp(0.1)}>
+    <div style={fadeLeft(0.1)}>
       <Eyebrow>Legendary Races</Eyebrow>
-      <Heading size={60}>Western States 100</Heading>
+      <Heading size={60}>西部100（Western States）</Heading>
       <p style={{ fontSize: 30, lineHeight: 1.52, color: '#383733', margin: '24px 0 22px' }}>
         1974 年，Gordy Ainsleigh 在原本属于马术耐力赛的 Tevis Cup 路线上跑完了 100 英里，证明人类双脚也能完成这段穿越。此后，这条从 Squaw Valley 到 Auburn 的 Sierra Nevada 山路，成了百英里越野跑的原型。
       </p>
@@ -369,7 +410,7 @@ const PageWestern100: Page = () => (
         从雪线到峡谷，从白天跑到黑夜再跑到天亮——百英里重新定义了”一天”的含义。
       </div>
     </div>
-    <div style={{ ...fadeUp(0.22), height: 760 }}>
+    <div style={{ ...fadeOnly(0.22), height: 760 }}>
       <Carousel images={[
         { src: wserStart, position: 'center' },
         { src: ws100Trail, position: 'center' },
@@ -383,16 +424,16 @@ const PageWestern100: Page = () => (
 const PageUTMB: Page = () => (
   <div style={{ ...shell(), display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 60, alignItems: 'center' }}>
     <style>{styles}</style>
-    <div style={{ ...fadeUp(0.1), height: 760 }}>
+    <div style={{ ...fadeOnly(0.1), height: 760 }}>
       <Carousel images={[
         { src: utmbChamonix, position: 'center' },
         { src: utmbRidge, position: 'center' },
         { src: utmbFinish, position: 'center' },
       ]} />
     </div>
-    <div style={fadeUp(0.22)}>
+    <div style={fadeRight(0.22)}>
       <Eyebrow>Legendary Races</Eyebrow>
-      <Heading size={60}>UTMB</Heading>
+      <Heading size={52}>UTMB · 环勃朗峰极限越野赛</Heading>
       <p style={{ fontSize: 30, lineHeight: 1.52, color: '#383733', margin: '24px 0 22px' }}>
         UTMB 从 Chamonix 出发，绕过法国、意大利、瑞士三国边境，把经典徒步路线变成了越野跑世界最具符号感的赛事。
       </p>
@@ -413,9 +454,9 @@ const PageUTMB: Page = () => (
 const PageTorDesGeants: Page = () => (
   <div style={{ ...shell(), display: 'grid', gridTemplateColumns: '2fr 3fr', gap: 60, alignItems: 'center' }}>
     <style>{styles}</style>
-    <div style={fadeUp(0.1)}>
+    <div style={fadeLeft(0.1)}>
       <Eyebrow>Legendary Races</Eyebrow>
-      <Heading size={60}>Tor des Geants</Heading>
+      <Heading size={52}>巨人之旅（Tor des Geants）</Heading>
       <p style={{ fontSize: 30, lineHeight: 1.52, color: '#383733', margin: '24px 0 22px' }}>
         Tor des Geants 在意大利瓦莱达奥斯塔山谷展开，路线绕过多座四千米级雪山，是更接近远征的超长距离越野。
       </p>
@@ -430,7 +471,7 @@ const PageTorDesGeants: Page = () => (
         330 公里、24000 米爬升、连续行进数天——这已经不是跑步，是一场关于睡眠、天气和意志力的远征。
       </div>
     </div>
-    <div style={{ ...fadeUp(0.22), height: 760 }}>
+    <div style={{ ...fadeOnly(0.22), height: 760 }}>
       <Carousel images={[
         { src: tdgPeaks, position: 'center' },
         { src: tdgTrail, position: 'center' },
@@ -443,7 +484,7 @@ const PageTorDesGeants: Page = () => (
 const Page800Gobi: Page = () => (
   <div style={{ ...shell(), display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 60, alignItems: 'center' }}>
     <style>{styles}</style>
-    <div style={{ ...fadeUp(0.1), height: 760 }}>
+    <div style={{ ...fadeOnly(0.1), height: 760 }}>
       <Carousel images={[
         { src: gobiMap, position: 'center' },
         { src: gobiWarrior, position: 'center' },
@@ -451,7 +492,7 @@ const Page800Gobi: Page = () => (
         { src: gobiSaltflat, position: 'center' },
       ]} />
     </div>
-    <div style={fadeUp(0.22)}>
+    <div style={fadeRight(0.22)}>
       <Eyebrow>Legendary Races</Eyebrow>
       <Heading size={60}>八百流沙</Heading>
       <p style={{ fontSize: 30, lineHeight: 1.52, color: '#383733', margin: '24px 0 22px' }}>
@@ -474,14 +515,14 @@ const Page800Gobi: Page = () => (
 const PageCategories: Page = () => (
   <div style={{ ...shell(), display: 'grid', gridTemplateColumns: '0.84fr 1.16fr', gap: 56, alignItems: 'center' }}>
     <style>{styles}</style>
-    <div style={fadeUp(0.1)}>
+    <div style={fadeLeft(0.1)}>
       <Eyebrow>Race Formats</Eyebrow>
       <Heading>不同组别，不同玩法</Heading>
       <p style={{ fontSize: 35, lineHeight: 1.55, color: muted, margin: '28px 0 0' }}>
         不必从超马开始。短距离可以看风景，50K 开始进入系统训练，100K 以上才是长期项目。
       </p>
     </div>
-    <div style={{ display: 'grid', gap: 16, ...fadeUp(0.22) }}>
+    <div style={{ display: 'grid', gap: 16, ...fadeOnly(0.22) }}>
       {[
         ['10-15K', '入门体验', '2-4 小时，适合首野'],
         ['25K', '入门进阶', '半天到一天，能明显感到爬升'],
@@ -513,7 +554,7 @@ const PageCategories: Page = () => (
 const PageHowToStart: Page = () => (
   <div style={{ ...shell(), display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 58, alignItems: 'center' }}>
     <style>{styles}</style>
-    <div style={fadeUp(0.1)}>
+    <div style={fadeLeft(0.1)}>
       <Eyebrow>Start Small</Eyebrow>
       <Heading>怎么开始？</Heading>
       <div style={{ display: 'grid', gap: 24, marginTop: 42 }}>
@@ -531,8 +572,8 @@ const PageHowToStart: Page = () => (
         ))}
       </div>
     </div>
-    <div style={{ ...fadeUp(0.22) }}>
-      <CaptionedImage image={natureZen} title="推荐首场" subtitle="选一个风景好、赛道成熟的短距离，感受越野跑的第一站。" height={700} objectPosition="center" />
+    <div style={{ ...fadeOnly(0.22) }}>
+      <CaptionedImage image={xishanSteps} title="推荐首场" subtitle="选一条常去的山路，跑起来就是开始。" height={700} objectPosition="center 40%" />
     </div>
   </div>
 );
@@ -563,6 +604,36 @@ const PageGearGuide: Page = () => (
   </div>
 );
 
+const PageThankYou: Page = () => (
+  <div style={{ ...fill, background: darkGreen, color: '#fff' }}>
+    <style>{styles}</style>
+    <img
+      src={xishanSummit}
+      alt=""
+      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 60%', filter: 'brightness(0.5)' }}
+    />
+    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(9,26,11,0.3), rgba(9,26,11,0.85))' }} />
+    <div style={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', textAlign: 'center' }}>
+      <div>
+        <h1
+          style={{
+            fontFamily: 'var(--osd-font-display)',
+            fontSize: 120,
+            fontWeight: 900,
+            margin: '0 0 32px',
+            ...fadeOnly(0.1),
+          }}
+        >
+          谢谢
+        </h1>
+        <p style={{ fontSize: 38, color: 'rgba(255,255,255,0.78)', margin: 0, maxWidth: 800, ...fadeOnly(0.24) }}>
+          回看来时路，每一步都算数。
+        </p>
+      </div>
+    </div>
+  </div>
+);
+
 export const meta: SlideMeta = { title: '越野跑 — 部门分享' };
 
 export default [
@@ -581,4 +652,5 @@ export default [
   PageCategories,
   PageHowToStart,
   PageGearGuide,
+  PageThankYou,
 ] satisfies Page[];

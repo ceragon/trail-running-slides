@@ -1,3 +1,4 @@
 node_modules
 dist
 preview-check
+.claude/settings.local.json
